@@ -28,7 +28,10 @@
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
     "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "@babel/preset-env": "^7.21.4",
+    "babel-jest": "^29.5.0",
     "electron": "^21.3.3",
     "electron-builder": "^23.6.0",
     "electron-rebuild": "^3.2.9",
