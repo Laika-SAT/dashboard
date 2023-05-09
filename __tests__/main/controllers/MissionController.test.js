@@ -71,6 +71,13 @@ describe('Mission controller tests', () => {
             expect(count).toBe(3);
         });
 
+        test('Should list all data while using no filters', async () => {
+            const rows = await MissionController.list({}, { num: 10, pag: 0, ord: 'startDate', asc: false });
+            console.log(rows);
+            expect(rows).toBeDefined();
+            expect(rows.length).toBeGreaterThan(0);
+        });
+
         afterAll(async () => {
             for (const createdRecord of createdRecords) {
                 await MissionController.remove(createdRecord);

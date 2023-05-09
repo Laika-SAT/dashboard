@@ -1,0 +1,77 @@
+.d-main {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    padding: 20px;
+}
+
+.d-footer {
+    width: 100%;
+    height: 120px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.d-footer-secondary-menu {
+    width: 40%;
+    height: 60px;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 60px solid #38405E;
+    position: relative;
+}
+
+.d-footer-primary-menu {
+    width: 100%;
+    height: 60px;
+    padding: 5px 10px;
+    background-color: #38405E;
+    border-top: 1px solid #A7A7A7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.d-footer-primary-menu > .left-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container > img {
+    width: 40px;
+    height: 40px;
+}
+
+.d-footer-title {
+    margin-left: 1rem;
+}
+
+.d-panel {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: visible;
+    border: 0.5px solid #7D82F5;
+    filter: drop-shadow(0px 24px 32px rgba(50, 50, 71, 0.08));
+    padding: 0;
+}
+
+.d-panel-container {
+    padding: 10px;
+}
+
+.d-panel-container:last-child {
+    padding: 10px;
+}

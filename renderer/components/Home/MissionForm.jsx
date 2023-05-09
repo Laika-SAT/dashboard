@@ -2,11 +2,12 @@ import {Alert, Box, Button, CircularProgress, Grid, MenuItem, TextField} from "@
 import {TimePicker} from "@mui/x-date-pickers";
 import React, {useState} from "react";
 import electron from 'electron';
+import moment from "moment";
 const ipcRender = electron.ipcRenderer || false;
 
-export default function MissionForm () {
+export default function MissionForm ({ onMissionStarted }) {
     const [name, setName] = useState('');
-    const [startTime, setStartTime] = useState(null);
+    const [startTime, setStartTime] = useState(moment());
     const [mode, setMode] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -27,9 +28,7 @@ export default function MissionForm () {
         setLoading(true);
         setError(null);
         createMission()
-            .then((data) => {
-                console.log(data);
-            })
+            .then((data) => onMissionStarted(data))
             .catch((e) => setError(e))
             .finally(() => setLoading(false));
     };
