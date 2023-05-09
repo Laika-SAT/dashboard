@@ -73,7 +73,9 @@ export default function DashboardPage () {
             if (newPackets?.length === renderedPackets) {
                 newPackets.shift();
             }
-            newPackets.push(JSON.parse(message.data));
+            const parsedMessage = JSON.parse(message.data);
+            console.log(parsedMessage);
+            newPackets.push(parsedMessage);
             return newPackets;
         });
     }, [setPackets]);

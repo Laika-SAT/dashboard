@@ -33,6 +33,14 @@ const serialPort = new SerialPort({
 });
 const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\n' }));
 
+let packets = 0;
+const keys = ["team", "presion", "temperatura", "orx", "ory", "orz", "acx", "acy", "acz", "vx", "vy", "vz", "voltaje", "gps_p_lat", "gps_p_long", "gps_p_alt", "gps_s_lat", "gps_s_long", "gps_s_alt", "elevacion", "azimuth", "distancia"];
+
+function parsePacket (packet) {
+  const sp = String(packet).split(',');
+  return sp.reduce((ac, current, index) => Object.assign(ac, { [keys[index]]: parseFloat(current) }), { timestamp: packets });
+}
+
 (async () => {
   await app.whenReady();
 
@@ -40,7 +48,8 @@ const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\n' }));
 
   wss.on('connection', function(w) {
      parser.on('data', (data) => {
-        w.send(String(data));
+        packets++;
+        w.send(JSON.stringify(parsePacket(data)));
      });
   });
 
