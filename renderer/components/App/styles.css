@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+body {
+    width: 100%;
+    background-image: radial-gradient(50% 50% at 50% 50%, #3C4FC7 47.92%, #313A6F 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #ffffff;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main {
+    width: 100%;
+    height: 90%;
+    background-color: blue;
+}
+
+.menu {
+    width: 100%;
+    height: 10%;
+    background-color: red;
+}
+
+.centered-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-item {
+
+}
+
+.h-centered {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+}

@@ -1,7 +1,7 @@
 node_modules
 *.log
 .next
-app
+./app
 dist
 .DS_Store
 .idea
