@@ -14,47 +14,20 @@ import {
 import { Line } from "react-chartjs-2";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
-function Model({ url }) {
-    const [obj, set] = useState();
-    useMemo(() => new OBJLoader().load(url, set), [url])
-    return obj ? <primitive object={obj} /> : null
-}
-
 ChartJS.defaults.color = '#999999';
 ChartJS.defaults.borderColor = 'rgba(228, 228, 228, 0.2)';
 
 ChartJS.register(
     ArcElement, Tooltip, Legend, 
-    CategoryScale, LinearScale, 
+    CategoryScale, LinearScale,
     PointElement, LineElement
 );
 
-function Box3D(props) {
-    // This reference gives us direct access to the THREE.Mesh object
-    const ref = useRef()
-    // Hold state for hovered and clicked events
-    const [hovered, hover] = useState(false)
-    const [clicked, click] = useState(false)
-    // Subscribe this component to the render-loop, rotate the mesh every frame
-    useFrame((state, delta) => (ref.current.rotation.x += delta))
-    // Return the view, these are regular Threejs elements expressed in JSX
-    return (
-      <mesh
-        {...props}
-        ref={ref}
-        scale={clicked ? 1.5 : 1}
-        onClick={(event) => click(!clicked)}
-        onPointerOver={(event) => hover(true)}
-        onPointerOut={(event) => hover(false)}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-      </mesh>
-    )
-  }
-
-function PayloadModel () {
-    const obj = useLoader(OBJLoader, '/model.obj')
-    return <mesh position={[0, -0.5, 0]} rotation={[ Math.PI + 0.5, 0, 0]} scale={[0.06, 0.06, 0.06]}>
+function PayloadModel ({ acx, acy, acz, orx, ory, orz }) {
+    const obj = useLoader(OBJLoader, '/model.obj');
+    let rollAngle = Math.atan2(orx, orz) * (180.0 /  Math.PI);
+    let pitchAngle = Math.atan2(-orx, Math.sqrt(ory * ory + orz * orz)) * (180.0 / Math.PI);
+    return <mesh position={[0, 2, 0]} scale={[0.06, 0.06, 0.06]} rotation={[ (Math.PI / 1.5) - rollAngle, pitchAngle, 0 ]}>
         <primitive object={obj} />
     </mesh>
 }
@@ -64,8 +37,8 @@ export default function DashboardPage () {
         theme = useTheme(),
         [ws, setWS] = useState(null),
         [packets, setPackets] = useState([]),
-        renderedPackets = 50,
-        startTime =  useMemo(() => new Date());
+        renderedPackets = 50, 
+        [lastReceivedPackage, setLastReceivedPackage] = useState(null);
 
     const handleNewData = useCallback((message) => {
         setPackets((prevPackets) => {
@@ -74,17 +47,25 @@ export default function DashboardPage () {
                 newPackets.shift();
             }
             const parsedMessage = JSON.parse(message.data);
-            console.log(parsedMessage);
             newPackets.push(parsedMessage);
+            setLastReceivedPackage(parsedMessage);
             return newPackets;
         });
     }, [setPackets]);
 
     useEffect(() => {
+        if (!ws) return;
+        if (!mission) return;
+        ws.send(JSON.stringify({ action: 'SET_MISSION', payload: mission }));
+    }, [ws, mission]);
+
+    useEffect(() => {
         if (ws) return;
         const newWs = new WebSocket('ws://localhost:1040');
         newWs.onerror = (error) => console.error('WS ERROR: ', error);
-        newWs.onopen = () => setWS(newWs);
+        newWs.onopen = () => {
+            setWS(newWs);
+        };
         newWs.onmessage = handleNewData;
     }, []);
 
@@ -313,7 +294,7 @@ export default function DashboardPage () {
                                 Ángulo Z
                             </Typography>
                             <Typography variant={'h5'} style={{ fontWeight: 'bold' }}>
-                                {packets[packets?.length-1]?.orz}°
+                                {lastReceivedPackage?.orz}°
                             </Typography>
                         </Box>
                     </Box>
@@ -324,7 +305,7 @@ export default function DashboardPage () {
                                     Ángulo X
                                 </Typography>
                                 <Typography variant={'h5'} style={{ fontWeight: 'bold' }}>
-                                    {packets[packets?.length-1]?.orx}°
+                                    {lastReceivedPackage?.orx}°
                                 </Typography>
                             </Box>
                         </Grid>
@@ -335,7 +316,14 @@ export default function DashboardPage () {
                                 <pointLight position={[-10, -10, -10]} />
                                 {/* <Box3D position={[-1.2, 0, 0]} />
                                 <Box3D position={[1.2, 0, 0]} /> */}
-                                <PayloadModel />
+                                <PayloadModel 
+                                    orx={lastReceivedPackage?.orx || 0} 
+                                    ory={lastReceivedPackage?.ory || 0} 
+                                    orz={lastReceivedPackage?.orz || 0}
+                                    acz={lastReceivedPackage?.acx || 0}
+                                    acx={lastReceivedPackage?.acy || 0}
+                                    acy={lastReceivedPackage?.acz || 0}
+                                />
                                 <OrbitControls />
                             </Canvas>
                         </Grid>
@@ -345,7 +333,7 @@ export default function DashboardPage () {
                                     Ángulo Y
                                 </Typography>
                                 <Typography variant={'h5'} style={{ fontWeight: 'bold' }}>
-                                    {packets[packets?.length-1]?.ory}°
+                                    {lastReceivedPackage?.ory}°
                                 </Typography>
                             </Box>
                         </Grid>
@@ -375,7 +363,7 @@ export default function DashboardPage () {
                             </Typography>
                             <Box py={3}>
                                 <Typography variant={'h2'}>
-                                    {Math.floor(packets[packets?.length-1]?.timestamp / 60)}.{packets[packets?.length-1]?.timestamp % 60}
+                                    {Math.floor(lastReceivedPackage?.timestamp / 60) || 0}.{lastReceivedPackage?.timestamp % 60 || 0}
                                 </Typography>
                             </Box>
                         </DashboardPanel>
@@ -475,6 +463,6 @@ export default function DashboardPage () {
                 </Grid>
             </Grid>
         </main>
-        <DashboardFooter />
+        <DashboardFooter mission={mission}/>
     </div>
 }

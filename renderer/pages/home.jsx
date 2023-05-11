@@ -12,7 +12,9 @@ function Home() {
     const handleMissionRedirect = (data) => {
         console.log('---- SETTING MISSION TO ----', data);
         setMission(data);
-        router.push('/dashboard');
+        setTimeout(() => {
+            router.push('/dashboard');
+        }, 0);
     };
 
     return (
