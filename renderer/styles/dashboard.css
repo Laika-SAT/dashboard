@@ -60,7 +60,7 @@
 }
 
 .d-panel {
-    border-radius: 0;
+    border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.1);
     overflow: visible;
     border: 0.5px solid #7D82F5;
@@ -74,4 +74,5 @@
 
 .d-panel-container:last-child {
     padding: 10px;
+    height: 100%;
 }

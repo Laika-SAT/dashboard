@@ -5,7 +5,7 @@ import electron from 'electron';
 import moment from "moment";
 const ipcRender = electron.ipcRenderer || false;
 
-export default function MissionForm ({ onMissionStarted }) {
+export default function MissionForm ({ onMissionStarted, onMissionCanceled }) {
     const [name, setName] = useState('');
     const [startTime, setStartTime] = useState(moment());
     const [mode, setMode] = useState('');
@@ -33,7 +33,12 @@ export default function MissionForm ({ onMissionStarted }) {
             .finally(() => setLoading(false));
     };
 
-    return <Box className={'create-mission-box'}>
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        handleCreateMission();
+    }
+
+    return <form className={'create-mission-box'} onSubmit={handleFormSubmit}>
         <Grid container spacing={3}>
             { Boolean(error) && <Alert severity={'error'}>{String(error)}</Alert> }
             <Grid item xs={12}>
@@ -46,6 +51,7 @@ export default function MissionForm ({ onMissionStarted }) {
                     label={'Nombre de la misión'}
                     placeholder={'Introduce el nombre de la misión'}
                     fullWidth
+                    required
                 />
             </Grid>
             <Grid item xs={6}>
@@ -59,6 +65,7 @@ export default function MissionForm ({ onMissionStarted }) {
             <Grid item xs={6}>
                 <TextField
                     select
+                    required
                     value={mode}
                     onChange={(e) => setMode(e.target.value)}
                     variant={'outlined'}
@@ -76,13 +83,22 @@ export default function MissionForm ({ onMissionStarted }) {
                 </TextField>
             </Grid>
             <Grid item xs={12}>
+                <Box pb={1}>
+                    <Button
+                        type={'submit'}
+                        variant={'contained'} color={'primary'}
+                        fullWidth
+                    >
+                        { loading ? <CircularProgress /> : 'Iniciar Misión' }
+                    </Button>
+                </Box>
                 <Button
-                    variant={'contained'} color={'primary'}
-                    fullWidth onClick={handleCreateMission}
+                    variant={'outlined'} color={'primary'}
+                    fullWidth onClick={onMissionCanceled}
                 >
-                    { loading ? <CircularProgress /> : 'Iniciar Misión' }
+                    Cancelar
                 </Button>
             </Grid>
         </Grid>
-    </Box>
+    </form>
 }

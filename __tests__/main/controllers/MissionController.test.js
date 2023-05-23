@@ -73,7 +73,6 @@ describe('Mission controller tests', () => {
 
         test('Should list all data while using no filters', async () => {
             const rows = await MissionController.list({}, { num: 10, pag: 0, ord: 'startDate', asc: false });
-            console.log(rows);
             expect(rows).toBeDefined();
             expect(rows.length).toBeGreaterThan(0);
         });

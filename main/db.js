@@ -20,6 +20,17 @@ db.serialize(() => {
     )`, (err) => {
         if (err) console.error("CREATE TABLE error", err);
     });
+
+    db.run(`CREATE TABLE if not exists metrics (
+        id INTEGER PRIMARY KEY,
+        timestamp INTEGER,
+        valid BOOLEAN,
+        packet TEXT,
+        mission INTEGER,
+        FOREIGN KEY(mission) REFERENCES missions(id)
+    )`, (err) => {
+        if (err) console.error("CREATE TABLE error", err);
+    });
 });
 
 export default db;

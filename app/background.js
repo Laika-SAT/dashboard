@@ -13,24 +13,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! electron */ "electron");
 /* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _helpers_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/util */ "./main/helpers/util.js");
-/* harmony import */ var csv_parser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! csv-parser */ "csv-parser");
-/* harmony import */ var csv_parser__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(csv_parser__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! fs */ "fs");
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controllers/MetricController */ "./main/controllers/MetricController.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
 
 
 
@@ -84,29 +71,34 @@ electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle('missions:list', (0,_helper
     return _ref.apply(this, arguments);
   };
 }()));
-var headers = ["team", "presion", "temperatura", "orx", "ory", "orz", "acx", "acy", "acz", "vx", "vy", "vz", "voltaje", "gps_p_lat", "gps_p_long", "gps_p_alt", "gps_s_lat", "gps_s_long", "gps_s_alt", "elevacion", "azimuth", "distancia"];
-electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle('missions:metrics', (0,_helpers_util__WEBPACK_IMPORTED_MODULE_2__.apiMethod)( /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(event, id) {
-    var fileName;
+electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle('metrics:list', (0,_helpers_util__WEBPACK_IMPORTED_MODULE_2__.apiMethod)( /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(event, data) {
+    var _JSON$parse2, filter, _JSON$parse2$options, num, pag, ord, asc, rows, totalCount;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          fileName = path__WEBPACK_IMPORTED_MODULE_5___default().resolve(__dirname, '../data/', "mission-".concat(id, ".csv"));
-          return _context2.abrupt("return", new Promise(function (resolve, reject) {
-            fs__WEBPACK_IMPORTED_MODULE_4___default().readFile(fileName, {
-              encoding: 'utf-8'
-            }, function (err, data) {
-              if (err) {
-                reject(err);
-              } else {
-                var records = String(data).split('\n').map(function (r) {
-                  return r.split(',');
-                });
-                resolve([headers].concat(_toConsumableArray(records)));
-              }
-            });
-          }));
-        case 2:
+          _JSON$parse2 = JSON.parse(data), filter = _JSON$parse2.filter, _JSON$parse2$options = _JSON$parse2.options, num = _JSON$parse2$options.num, pag = _JSON$parse2$options.pag, ord = _JSON$parse2$options.ord, asc = _JSON$parse2$options.asc;
+          _context2.next = 3;
+          return _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].list(filter, {
+            num: num,
+            pag: pag,
+            ord: ord,
+            asc: asc
+          });
+        case 3:
+          rows = _context2.sent;
+          _context2.next = 6;
+          return _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].count(filter);
+        case 6:
+          totalCount = _context2.sent;
+          return _context2.abrupt("return", {
+            totalCount: totalCount,
+            totalEdges: rows.length,
+            pag: pag,
+            hasMore: (pag + 1) * num < totalCount,
+            data: rows
+          });
+        case 8:
         case "end":
           return _context2.stop();
       }
@@ -116,6 +108,449 @@ electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle('missions:metrics', (0,_hel
     return _ref2.apply(this, arguments);
   };
 }()));
+electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle('metrics:listJSON', (0,_helpers_util__WEBPACK_IMPORTED_MODULE_2__.apiMethod)( /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(event, data) {
+    var _JSON$parse3, filter, _JSON$parse3$options, num, pag, ord, asc, rows, totalCount;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _JSON$parse3 = JSON.parse(data), filter = _JSON$parse3.filter, _JSON$parse3$options = _JSON$parse3.options, num = _JSON$parse3$options.num, pag = _JSON$parse3$options.pag, ord = _JSON$parse3$options.ord, asc = _JSON$parse3$options.asc;
+          _context3.next = 3;
+          return _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].list(filter, {
+            num: num,
+            pag: pag,
+            ord: ord,
+            asc: asc
+          });
+        case 3:
+          rows = _context3.sent;
+          _context3.next = 6;
+          return _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].count(filter);
+        case 6:
+          totalCount = _context3.sent;
+          return _context3.abrupt("return", {
+            totalCount: totalCount,
+            totalEdges: rows.length,
+            pag: pag,
+            hasMore: (pag + 1) * num < totalCount,
+            data: rows.map(function (row) {
+              return _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].getUnpackedMetric(row);
+            })
+          });
+        case 8:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+  return function (_x5, _x6) {
+    return _ref3.apply(this, arguments);
+  };
+}()));
+electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle('metrics:csv', (0,_helpers_util__WEBPACK_IMPORTED_MODULE_2__.apiMethod)( /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(event, id) {
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          return _context4.abrupt("return", _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].getByMissionId(id));
+        case 1:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return function (_x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}()));
+
+/***/ }),
+
+/***/ "./main/controllers/MetricController.js":
+/*!**********************************************!*\
+  !*** ./main/controllers/MetricController.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ MetricController)
+/* harmony export */ });
+/* harmony import */ var _db__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../db */ "./main/db.js");
+/* harmony import */ var _MissionController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MissionController */ "./main/controllers/MissionController.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+var MetricController = /*#__PURE__*/function () {
+  function MetricController() {
+    _classCallCheck(this, MetricController);
+  }
+  _createClass(MetricController, null, [{
+    key: "create",
+    value: function () {
+      var _create = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(_ref) {
+        var timestamp, valid, packet, mission;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              timestamp = _ref.timestamp, valid = _ref.valid, packet = _ref.packet, mission = _ref.mission;
+              _context.prev = 1;
+              if (packet) {
+                _context.next = 4;
+                break;
+              }
+              throw new Error('No packet specified');
+            case 4:
+              if (mission) {
+                _context.next = 6;
+                break;
+              }
+              throw new Error('Mission should be declared');
+            case 6:
+              if (!timestamp) timestamp = Math.floor(new Date().getTime() / 1000);
+              return _context.abrupt("return", new Promise(function (resolve, reject) {
+                _db__WEBPACK_IMPORTED_MODULE_0__["default"].run("INSERT INTO metrics(timestamp, valid, packet, mission) VALUES(?, ?, ?, ?)", [timestamp, valid, packet, mission], function (err) {
+                  if (err) {
+                    reject(err);
+                    return;
+                  }
+                  var id = this.lastID;
+                  resolve({
+                    id: id,
+                    timestamp: timestamp,
+                    valid: valid,
+                    mission: mission,
+                    packet: packet
+                  });
+                });
+              }));
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](1);
+              console.error('ASIDFHOFGG', _context.t0);
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[1, 10]]);
+      }));
+      function create(_x) {
+        return _create.apply(this, arguments);
+      }
+      return create;
+    }()
+  }, {
+    key: "get",
+    value: function () {
+      var _get = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(id) {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              if (id) {
+                _context2.next = 3;
+                break;
+              }
+              throw new Error('No id provided');
+            case 3:
+              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                _db__WEBPACK_IMPORTED_MODULE_0__["default"].all('SELECT * FROM metrics WHERE id = ?', [id], function (err, data) {
+                  if (err) {
+                    reject(err);
+                  }
+                  resolve(data[0]);
+                });
+              }));
+            case 6:
+              _context2.prev = 6;
+              _context2.t0 = _context2["catch"](0);
+              console.error('SDFINPSSD', _context2.t0);
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, null, [[0, 6]]);
+      }));
+      function get(_x2) {
+        return _get.apply(this, arguments);
+      }
+      return get;
+    }()
+  }, {
+    key: "getByMissionId",
+    value: function () {
+      var _getByMissionId = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(id) {
+        var rows, unpackedRows;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return new Promise(function (resolve, reject) {
+                _db__WEBPACK_IMPORTED_MODULE_0__["default"].all("SELECT * FROM metrics WHERE mission = ? ORDER BY timestamp DESC", [id], function (err, data) {
+                  if (err) {
+                    reject(err);
+                  }
+                  resolve(data);
+                });
+              });
+            case 3:
+              rows = _context3.sent;
+              unpackedRows = rows.map(function (r) {
+                var _r$packet;
+                return r === null || r === void 0 ? void 0 : (_r$packet = r.packet) === null || _r$packet === void 0 ? void 0 : _r$packet.split(',');
+              });
+              return _context3.abrupt("return", [MetricController.packetKeys].concat(_toConsumableArray(unpackedRows)));
+            case 8:
+              _context3.prev = 8;
+              _context3.t0 = _context3["catch"](0);
+              console.error('ASDONODFS', _context3.t0);
+            case 11:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, null, [[0, 8]]);
+      }));
+      function getByMissionId(_x3) {
+        return _getByMissionId.apply(this, arguments);
+      }
+      return getByMissionId;
+    }()
+  }, {
+    key: "remove",
+    value: function () {
+      var _remove = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(id) {
+        var prev;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              if (id) {
+                _context4.next = 3;
+                break;
+              }
+              throw new Error('No id provided');
+            case 3:
+              _context4.next = 5;
+              return this.get(id);
+            case 5:
+              prev = _context4.sent;
+              if (prev) {
+                _context4.next = 8;
+                break;
+              }
+              throw new Error("There are no metric with id ".concat(id));
+            case 8:
+              return _context4.abrupt("return", new Promise(function (resolve, reject) {
+                _db__WEBPACK_IMPORTED_MODULE_0__["default"].run('DELETE FROM metrics WHERE id=?', [id], function (err) {
+                  if (err) {
+                    reject(err);
+                  }
+                  resolve(true);
+                });
+              }));
+            case 11:
+              _context4.prev = 11;
+              _context4.t0 = _context4["catch"](0);
+              console.error("SIOHFOSDFS", _context4.t0);
+            case 14:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4, this, [[0, 11]]);
+      }));
+      function remove(_x4) {
+        return _remove.apply(this, arguments);
+      }
+      return remove;
+    }()
+  }, {
+    key: "removeByMissionId",
+    value: function () {
+      var _removeByMissionId = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(id) {
+        var mission;
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.prev = 0;
+              if (id) {
+                _context5.next = 3;
+                break;
+              }
+              throw new Error('No id provided');
+            case 3:
+              _context5.next = 5;
+              return _MissionController__WEBPACK_IMPORTED_MODULE_1__["default"].get(id);
+            case 5:
+              mission = _context5.sent;
+              if (mission) {
+                _context5.next = 8;
+                break;
+              }
+              throw new Error('the provided id does not belong from any stored mission');
+            case 8:
+              return _context5.abrupt("return", new Promise(function (resolve, reject) {
+                _db__WEBPACK_IMPORTED_MODULE_0__["default"].run('DELETE FROM metrics WHERE mission=?', [id], function (err) {
+                  if (err) {
+                    reject(err);
+                  }
+                  resolve(true);
+                });
+              }));
+            case 11:
+              _context5.prev = 11;
+              _context5.t0 = _context5["catch"](0);
+              console.error('ODBNOSDFSA', _context5.t0);
+            case 14:
+            case "end":
+              return _context5.stop();
+          }
+        }, _callee5, null, [[0, 11]]);
+      }));
+      function removeByMissionId(_x5) {
+        return _removeByMissionId.apply(this, arguments);
+      }
+      return removeByMissionId;
+    }()
+  }, {
+    key: "processFilter",
+    value: function processFilter(filter) {
+      if (Object.keys(filter).length === 0) return ['', []];
+      var conditions = [],
+        vars = [];
+      if (filter.mission) {
+        conditions.push("mission = ?");
+        vars.push(filter.mission);
+      }
+      if (typeof filter.valid !== 'undefined') {
+        if (typeof filter.valid === 'boolean') filter.valid = +filter.valid;
+        conditions.push("valid = ?");
+        vars.push(filter.valid);
+      }
+      if (filter.timestamp) {
+        conditions.push("timestamp BETWEEN datetime(?) AND datetime(?)");
+        var from = filter.timestamp[0];
+        var to = filter.timestamp.length === 1 ? filter.timestamp[1] : new Date();
+        vars.push.apply(vars, [from, to]);
+      }
+      conditions = conditions.reduce(function (acc, current, index) {
+        return acc + current + (index < conditions.length - 1 ? ' AND ' : '');
+      }, 'WHERE ');
+      return [conditions, vars];
+    }
+  }, {
+    key: "count",
+    value: function () {
+      var _count = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(filter) {
+        var _this$processFilter, _this$processFilter2, conditions, vars;
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) switch (_context6.prev = _context6.next) {
+            case 0:
+              _this$processFilter = this.processFilter(filter), _this$processFilter2 = _slicedToArray(_this$processFilter, 2), conditions = _this$processFilter2[0], vars = _this$processFilter2[1];
+              return _context6.abrupt("return", new Promise(function (resolve, reject) {
+                _db__WEBPACK_IMPORTED_MODULE_0__["default"].all("SELECT COUNT(*) FROM metrics ".concat(conditions), vars, function (err, data) {
+                  if (err) {
+                    reject(err);
+                  }
+                  resolve(data[0]['COUNT(*)']);
+                });
+              }));
+            case 2:
+            case "end":
+              return _context6.stop();
+          }
+        }, _callee6, this);
+      }));
+      function count(_x6) {
+        return _count.apply(this, arguments);
+      }
+      return count;
+    }()
+  }, {
+    key: "list",
+    value: function () {
+      var _list = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(filter, options) {
+        var _this$processFilter3, _this$processFilter4, conditions, vars, limit, skip, order;
+        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+          while (1) switch (_context7.prev = _context7.next) {
+            case 0:
+              _this$processFilter3 = this.processFilter(filter), _this$processFilter4 = _slicedToArray(_this$processFilter3, 2), conditions = _this$processFilter4[0], vars = _this$processFilter4[1], limit = "LIMIT ".concat(options.num || 10), skip = "OFFSET ".concat((options.pag || 0) * (options.num || 1)), order = "ORDER BY ".concat(options.ord ? options.ord : 'timestamp', " ").concat(options.asc ? 'ASC' : 'DESC');
+              return _context7.abrupt("return", new Promise(function (resolve, reject) {
+                _db__WEBPACK_IMPORTED_MODULE_0__["default"].all("SELECT * FROM metrics ".concat(conditions, " ").concat(order, " ").concat(limit, " ").concat(skip), vars, function (err, data) {
+                  if (err) {
+                    reject(err);
+                  }
+                  resolve(data);
+                });
+              }));
+            case 2:
+            case "end":
+              return _context7.stop();
+          }
+        }, _callee7, this);
+      }));
+      function list(_x7, _x8) {
+        return _list.apply(this, arguments);
+      }
+      return list;
+    }()
+  }, {
+    key: "parseValue",
+    value: function parseValue(value) {
+      if (isNaN(value)) return value.toString();
+      return parseFloat(value);
+    }
+  }, {
+    key: "unpack",
+    value: function unpack(packet) {
+      var _this = this;
+      var sp = String(packet).split(',');
+      return sp.reduce(function (ac, current, index) {
+        return Object.assign(ac, _defineProperty({}, _this.packetKeys[index], _this.parseValue(current)));
+      }, {});
+    }
+  }, {
+    key: "getUnpackedMetric",
+    value: function getUnpackedMetric(metric) {
+      //if (!this.isValidPacket(metric.packet)) throw new Error('Metric with wrong format');
+      var parsedPacket = this.unpack(metric.packet);
+      delete metric.packet;
+      return Object.assign(metric, parsedPacket);
+    }
+  }, {
+    key: "isValidPacket",
+    value: function isValidPacket(packet) {
+      return this.packetValidator.test(packet);
+    }
+  }]);
+  return MetricController;
+}();
+_defineProperty(MetricController, "packetKeys", [
+// LAIKA 1
+"packet_1", "vx_1", "vy_1", "vz_1", "orx_1", "ory_1", "orz_1", "acx_1", "acy_1", "acz_1", "gps_p_lat", "gps_p_long", "gps_p_alt", "voltaje_1",
+// LAIKA 2
+"packet_2", "pressure", "temperature", "high", "vx_2", "vy_2", "vz_2", "orx_2", "ory_2", "orz_2", "acx_2", "acy_2", "acz_2", "gps_s_lat", "gps_s_long", "gps_s_alt", "voltaje_2", "ascent", "maxHighReached", "autogiro", "payloadRelease", "valid"]);
+_defineProperty(MetricController, "packetValidator", new RegExp(/^LAIKA1,[0-9.-]+,([0-9.-]+,)*[0-9.-]+,$/));
+
 
 /***/ }),
 
@@ -498,6 +933,9 @@ db.serialize(function () {
   db.run("CREATE TABLE if not exists missions (\n        id INTEGER PRIMARY KEY,\n        name varchar(255),\n        status varchar(9) CHECK (status IN ('active', 'inactive', 'failed')),\n        startDate datetime,\n        endDate datetime NULL,\n        mode varchar(11) CHECK (mode IN ('simulation', 'live'))\n    )", function (err) {
     if (err) console.error("CREATE TABLE error", err);
   });
+  db.run("CREATE TABLE if not exists metrics (\n        id INTEGER PRIMARY KEY,\n        timestamp INTEGER,\n        valid BOOLEAN,\n        packet TEXT,\n        mission INTEGER,\n        FOREIGN KEY(mission) REFERENCES missions(id)\n    )", function (err) {
+    if (err) console.error("CREATE TABLE error", err);
+  });
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (db);
 
@@ -657,16 +1095,6 @@ function apiMethod(method) {
 
 /***/ }),
 
-/***/ "csv-parser":
-/*!*****************************!*\
-  !*** external "csv-parser" ***!
-  \*****************************/
-/***/ ((module) => {
-
-module.exports = require("csv-parser");
-
-/***/ }),
-
 /***/ "electron-serve":
 /*!*********************************!*\
   !*** external "electron-serve" ***!
@@ -724,26 +1152,6 @@ module.exports = require("ws");
 /***/ ((module) => {
 
 module.exports = require("electron");
-
-/***/ }),
-
-/***/ "fs":
-/*!*********************!*\
-  !*** external "fs" ***!
-  \*********************/
-/***/ ((module) => {
-
-module.exports = require("fs");
-
-/***/ }),
-
-/***/ "path":
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-/***/ ((module) => {
-
-module.exports = require("path");
 
 /***/ }),
 
@@ -837,24 +1245,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var electron_serve__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! electron-serve */ "electron-serve");
 /* harmony import */ var electron_serve__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(electron_serve__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers */ "./main/helpers/index.js");
-/* harmony import */ var serialport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! serialport */ "serialport");
-/* harmony import */ var serialport__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(serialport__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ws */ "ws");
-/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ws__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./config.json */ "./main/config.json");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./api */ "./main/api.js");
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! fs */ "fs");
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controllers/MetricController */ "./main/controllers/MetricController.js");
+/* harmony import */ var serialport__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! serialport */ "serialport");
+/* harmony import */ var serialport__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(serialport__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ws */ "ws");
+/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ws__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./config.json */ "./main/config.json");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./api */ "./main/api.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-
 
 
 
@@ -871,13 +1272,13 @@ if (isProd) {
 } else {
   electron__WEBPACK_IMPORTED_MODULE_0__.app.setPath('userData', "".concat(electron__WEBPACK_IMPORTED_MODULE_0__.app.getPath('userData'), " (development)"));
 }
-var wss = new (ws__WEBPACK_IMPORTED_MODULE_4___default().Server)(_config_json__WEBPACK_IMPORTED_MODULE_5__.WSS);
+var wss = new (ws__WEBPACK_IMPORTED_MODULE_5___default().Server)(_config_json__WEBPACK_IMPORTED_MODULE_6__.WSS);
 wss.on('error', function (error) {
   if (error) {
     return console.log('WSS ERROR: ', error);
   }
 });
-var serialPort = new serialport__WEBPACK_IMPORTED_MODULE_3__.SerialPort({
+var serialPort = new serialport__WEBPACK_IMPORTED_MODULE_4__.SerialPort({
   //"path": "/dev/cu.usbserial-A50285BI",
   "path": "/dev/cu.usbserial-00000000",
   "baudRate": 9600
@@ -886,78 +1287,98 @@ var serialPort = new serialport__WEBPACK_IMPORTED_MODULE_3__.SerialPort({
     return console.log('SERIAL PORT ERROR: ', err);
   }
 });
-var parser = serialPort.pipe(new serialport__WEBPACK_IMPORTED_MODULE_3__.ReadlineParser({
+var parser = serialPort.pipe(new serialport__WEBPACK_IMPORTED_MODULE_4__.ReadlineParser({
   delimiter: '\r\n'
 }));
-var packets = 0;
-var keys = ["team", "presion", "temperatura", "orx", "ory", "orz", "acx", "acy", "acz", "vx", "vy", "vz", "voltaje", "gps_p_lat", "gps_p_long", "gps_p_alt", "gps_s_lat", "gps_s_long", "gps_s_alt", "elevacion", "azimuth", "distancia"];
-function parsePacket(packet) {
-  var sp = String(packet).split(',');
-  return sp.reduce(function (ac, current, index) {
-    return Object.assign(ac, _defineProperty({}, keys[index], parseFloat(current)));
-  }, {
-    timestamp: packets
-  });
-}
-var packageValidator = new RegExp(/^LAIKA1,[0-9.-]+,([0-9.-]+,)*[0-9.-]+,$/);
 var mission = null;
-_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+var recording = false;
+_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
   var mainWindow, port;
-  return _regeneratorRuntime().wrap(function _callee$(_context) {
-    while (1) switch (_context.prev = _context.next) {
+  return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+    while (1) switch (_context2.prev = _context2.next) {
       case 0:
-        _context.next = 2;
+        _context2.next = 2;
         return electron__WEBPACK_IMPORTED_MODULE_0__.app.whenReady();
       case 2:
-        mainWindow = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.createWindow)('main', _config_json__WEBPACK_IMPORTED_MODULE_5__.WINDOW);
+        mainWindow = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.createWindow)('main', _config_json__WEBPACK_IMPORTED_MODULE_6__.WINDOW);
         wss.on('connection', function (w) {
           w.on('message', function (data) {
             var parsed = JSON.parse(data);
-            if (parsed.action === 'SET_MISSION') {
-              mission = parsed.payload;
-              console.log('MISSION CONFIGURED TO', mission);
-              return;
+            switch (parsed.action) {
+              case 'SET_MISSION':
+                mission = parsed.payload;
+                console.log('MISSION CONFIGURED TO', mission);
+                break;
+              case 'SET_RECORDING':
+                recording = parsed.payload;
+                console.log('RECORDING: ', recording);
+                break;
             }
           });
-          parser.on('data', function (data) {
-            packets++;
-            var packet = String(data);
-            if (mission) {
-              var fileName = "./mission-".concat(mission.id, ".csv");
-              fs__WEBPACK_IMPORTED_MODULE_7___default().appendFileSync(path__WEBPACK_IMPORTED_MODULE_8___default().join(__dirname, '../data', fileName), packet + "\r\n", function (err) {
-                if (err) throw err;
-                console.log('Example Saved!! - ------------');
-              });
-            }
-            if (!packageValidator.test(packet)) {
-              console.log('Invalid packet received: ', packet);
-              return;
-            }
-            //console.log("PURE DATA: ", packet);
-            packet = parsePacket(packet);
-            w.send(JSON.stringify(packet));
-          });
+          parser.on('data', /*#__PURE__*/function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(data) {
+              var _mission;
+              var packet, parsedPacket, unpacketMetric;
+              return _regeneratorRuntime().wrap(function _callee$(_context) {
+                while (1) switch (_context.prev = _context.next) {
+                  case 0:
+                    packet = String(data);
+                    console.log(packet);
+                    parsedPacket = {
+                      id: 0,
+                      timestamp: Math.floor(new Date().getTime() / 1000),
+                      valid: _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].isValidPacket(packet),
+                      mission: (_mission = mission) === null || _mission === void 0 ? void 0 : _mission.id,
+                      packet: packet
+                    };
+                    if (!recording) {
+                      _context.next = 12;
+                      break;
+                    }
+                    _context.prev = 4;
+                    _context.next = 7;
+                    return _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].create(parsedPacket);
+                  case 7:
+                    _context.next = 12;
+                    break;
+                  case 9:
+                    _context.prev = 9;
+                    _context.t0 = _context["catch"](4);
+                    console.error('-- METRIC ERROR --', _context.t0);
+                  case 12:
+                    unpacketMetric = _controllers_MetricController__WEBPACK_IMPORTED_MODULE_3__["default"].getUnpackedMetric(parsedPacket);
+                    w.send(JSON.stringify(unpacketMetric));
+                  case 14:
+                  case "end":
+                    return _context.stop();
+                }
+              }, _callee, null, [[4, 9]]);
+            }));
+            return function (_x) {
+              return _ref2.apply(this, arguments);
+            };
+          }());
         });
         if (!isProd) {
-          _context.next = 9;
+          _context2.next = 9;
           break;
         }
-        _context.next = 7;
+        _context2.next = 7;
         return mainWindow.loadURL('app://./home.html');
       case 7:
-        _context.next = 13;
+        _context2.next = 13;
         break;
       case 9:
         port = process.argv[2];
-        _context.next = 12;
-        return mainWindow.loadURL("http://localhost:".concat(port, "/home"));
+        _context2.next = 12;
+        return mainWindow.loadURL("http://localhost:".concat(port, "/"));
       case 12:
         mainWindow.webContents.openDevTools();
       case 13:
       case "end":
-        return _context.stop();
+        return _context2.stop();
     }
-  }, _callee);
+  }, _callee2);
 }))();
 electron__WEBPACK_IMPORTED_MODULE_0__.app.on('window-all-closed', function () {
   electron__WEBPACK_IMPORTED_MODULE_0__.app.quit();

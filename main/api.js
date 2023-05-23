@@ -1,9 +1,7 @@
 import MissionController from "./controllers/MissionController";
 import { ipcMain } from 'electron';
 import { apiMethod } from './helpers/util';
-import csv from 'csv-parser';
-import fs from 'fs';
-import path from 'path';
+import MetricController from "./controllers/MetricController";
 
 ipcMain.handle('missions:get', apiMethod((event, id) => MissionController.get(id)));
 
@@ -28,20 +26,29 @@ ipcMain.handle('missions:list', apiMethod(async (event, data) => {
     };
 }));
 
-const headers = ["team", "presion", "temperatura", "orx", "ory", "orz", "acx", "acy", "acz", "vx", "vy", "vz", "voltaje", "gps_p_lat", "gps_p_long", "gps_p_alt", "gps_s_lat", "gps_s_long", "gps_s_alt", "elevacion", "azimuth", "distancia"];
-
-ipcMain.handle('missions:metrics', apiMethod(async (event, id) => {
-    const fileName = path.resolve(__dirname, '../data/', `mission-${id}.csv`);
-    return new Promise((resolve, reject) => {
-        fs.readFile(fileName, { encoding: 'utf-8' }, (err, data) => {
-            if (err) {
-                reject(err);
-            } else {
-                const records = String(data).split('\n').map(r => {
-                    return r.split(',');
-                });
-                resolve([headers, ...records]);
-            }
-        });
-    });
+ipcMain.handle('metrics:list', apiMethod(async (event, data) => {
+    const { filter, options: { num, pag, ord, asc } } = JSON.parse(data);
+    const rows = await MetricController.list(filter, { num, pag, ord, asc }),
+        totalCount = await MetricController.count(filter);
+    return {
+        totalCount,
+        totalEdges: rows.length,
+        pag, hasMore: ((pag + 1) * num < totalCount),
+        data: rows
+    };
 }));
+
+ipcMain.handle('metrics:listJSON', apiMethod(async (event, data) => {
+    const { filter, options: { num, pag, ord, asc } } = JSON.parse(data);
+    const rows = await MetricController.list(filter, { num, pag, ord, asc }),
+        totalCount = await MetricController.count(filter);
+    return {
+        totalCount,
+        totalEdges: rows.length,
+        pag, hasMore: ((pag + 1) * num < totalCount),
+        data: rows.map((row) => MetricController.getUnpackedMetric(row))
+    };
+}));
+
+
+ipcMain.handle('metrics:csv', apiMethod(async (event, id) => MetricController.getByMissionId(id)));

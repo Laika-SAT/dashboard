@@ -14,7 +14,7 @@ import "../styles/home.css";
 import "../styles/dashboard.css";
 
 export default function App({ Component, pageProps }) {
-    const [loading, setLoading] = useState(true),
+    const [loading, setLoading] = useState(false),
         [mission, setMission] = useState(null);
 
     useEffect(() => {

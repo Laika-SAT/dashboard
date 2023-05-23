@@ -85,6 +85,28 @@ const Theme = createTheme({
             backgroundColor: '#fff'
           }
         },
+        containedSuccess: {
+          backgroundColor: 'rgba(63, 226, 92, 0.5)',
+          color: '#fff',
+          borderRadius: '50px',
+          border: '1px solid #3FE25C',
+          textTransform: 'none',
+          fontWeight: 'bold',
+          '& :hover': {
+            backgroundColor: '#fff'
+          }
+        },
+        containedError: {
+          backgroundColor: 'rgba(255, 82, 82, 0.5)',
+          color: '#fff',
+          borderRadius: '50px',
+          border: '1px solid #FF5252',
+          textTransform: 'none',
+          fontWeight: 'bold',
+          '& :hover': {
+            backgroundColor: '#fff'
+          }
+        }
       },
     },
     MuiCard: {
@@ -109,6 +131,13 @@ const Theme = createTheme({
       styleOverrides: {
         root: {
           color: '#444'
+        }
+      }
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
         }
       }
     }

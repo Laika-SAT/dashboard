@@ -1,12 +1,11 @@
 import { app } from 'electron';
 import serve from 'electron-serve';
 import { createWindow } from './helpers';
+import MetricController from './controllers/MetricController';
 import { SerialPort, ReadlineParser } from 'serialport';
 import WebSocket from 'ws';
 import CONFIG from './config.json';
 import './api';
-import fs from 'fs';
-import path from 'path';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -34,17 +33,8 @@ const serialPort = new SerialPort({
 });
 const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\r\n' }));
 
-let packets = 0;
-const keys = ["team", "presion", "temperatura", "orx", "ory", "orz", "acx", "acy", "acz", "vx", "vy", "vz", "voltaje", "gps_p_lat", "gps_p_long", "gps_p_alt", "gps_s_lat", "gps_s_long", "gps_s_alt", "elevacion", "azimuth", "distancia"];
-
-function parsePacket (packet) {
-  const sp = String(packet).split(',');
-  return sp.reduce((ac, current, index) => Object.assign(ac, { [keys[index]]: parseFloat(current) }), { timestamp: packets });
-}
-
-const packageValidator = new RegExp(/^LAIKA1,[0-9.-]+,([0-9.-]+,)*[0-9.-]+,$/);
-
 let mission = null;
+let recording = false;
 
 (async () => {
   await app.whenReady();
@@ -52,35 +42,40 @@ let mission = null;
   const mainWindow = createWindow('main', CONFIG.WINDOW);
 
   wss.on('connection', function(w) {
-
     w.on('message', function (data) {
       const parsed = JSON.parse(data);
-      if (parsed.action === 'SET_MISSION') {
-        mission = parsed.payload;
-        console.log('MISSION CONFIGURED TO', mission);
-        return;
+
+      switch (parsed.action) {
+        case 'SET_MISSION':
+          mission = parsed.payload;
+          console.log('MISSION CONFIGURED TO', mission);
+          break;
+        case 'SET_RECORDING':
+          recording = parsed.payload;
+          console.log('RECORDING: ', recording);
+          break;
       }
     });
 
-    parser.on('data', (data) => {
-      packets++;
+    parser.on('data', async (data) => {
       let packet = String(data);
-
-      if (mission) {
-        const fileName = `./mission-${mission.id}.csv`;
-        fs.appendFileSync(path.join(__dirname, '../data', fileName), packet + "\r\n", function (err) {
-          if (err) throw err;
-          console.log('Example Saved!! - ------------');
-        });
+      console.log(packet);
+      const parsedPacket = {
+        id: 0,
+        timestamp: Math.floor(new Date().getTime() / 1000), 
+        valid: MetricController.isValidPacket(packet), 
+        mission: mission?.id, 
+        packet,
+      };
+      if (recording) {
+        try {
+          await MetricController.create(parsedPacket)
+        } catch (error) {
+          console.error('-- METRIC ERROR --', error);
+        }
       }
-      
-      if (!packageValidator.test(packet)) {
-        console.log('Invalid packet received: ', packet);
-        return;
-      }
-      //console.log("PURE DATA: ", packet);
-      packet = parsePacket(packet);
-      w.send(JSON.stringify(packet));
+      const unpacketMetric = MetricController.getUnpackedMetric(parsedPacket);
+      w.send(JSON.stringify(unpacketMetric));
     });
   });
 
@@ -88,7 +83,7 @@ let mission = null;
     await mainWindow.loadURL('app://./home.html');
   } else {
     const port = process.argv[2];
-    await mainWindow.loadURL(`http://localhost:${port}/home`);
+    await mainWindow.loadURL(`http://localhost:${port}/`);
     mainWindow.webContents.openDevTools();
   }
 })();
